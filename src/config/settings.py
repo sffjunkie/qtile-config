@@ -3,6 +3,8 @@ from enum import Enum
 from pathlib import Path
 from typing import Dict, Optional
 
+import yaml
+
 from secrets import load_secrets
 from theme import load_theme
 
@@ -56,7 +58,8 @@ def load_settings() -> Dict:
 
     settings_file = Path(__file__).parent / "settings.yaml"
     if settings_file.exists():
-        settings_yaml = yaml.load(config, yaml.SafeLoader)
+        with open(settings_file, "r") as fp:
+            settings_yaml = yaml.load(fp, yaml.SafeLoader)
         settings.update(settings_yaml)
 
     return settings
