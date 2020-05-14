@@ -1,9 +1,9 @@
-import pl
-p = pl.Powerline("ffff", ["000000", "888888"])
-print(p.widgets())
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(__file__, "..", "..", "config")))
 
-from libqtile.widget.cpu import CPU
-c = CPU()
-s = pl.Segment(c)
-p.add(s)
-print(p.widgets())
+import pl
+
+def test_Empty():
+    p = pl.Powerline("ffffff", ["000000", "888888"])
+    assert p.widgets() == []
