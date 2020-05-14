@@ -43,18 +43,6 @@ WIDGET_BASE = widget.base._Widget
 WIDGET = Union[List[WIDGET_BASE], WIDGET_BASE]
 
 
-def _segment_separator() -> widget.TextBox:
-    return widget.base._TextBox(
-        text=separator,
-        font=font,
-        fontsize=22 - 4,
-        padding=0,
-        margin=0,
-        foreground=background,
-        background=foreground,
-    )
-
-
 class Segment:
     def __init__(self, widgets: WIDGET = []):
         self._fg = ""
