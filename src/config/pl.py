@@ -85,8 +85,10 @@ class Segment:
             return []
 
         l = []
+        if self.widget_list and not isinstance(self.widget_list[0], widget.Sep):
         l.append(self.sep)
         l.extend(self.widget_list)
+        if self.widget_list and not isinstance(self.widget_list[-1], widget.Sep):
         l.append(self.sep)
         return l
 
