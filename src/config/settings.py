@@ -8,8 +8,6 @@ import yaml
 from secrets import load_secrets
 from theme import load_theme
 
-__settings = None
-
 DEFAULT_SETTINGS = {
     "mod": "mod4",
     "term": "alacritty",
