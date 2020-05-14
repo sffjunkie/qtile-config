@@ -2,20 +2,20 @@
 
 >>> powerline = Powerline(foreground="ffffff", background=["aaaaaa", "cccccc"])
 >>> systray = Segment(
-    [
-    widget.Systray(
-        foreground=theme_colors["powerline_fg"],
-        background=theme_colors["powerline_background"][3],
-    ),
-    widget.Sep(linewidth=0, padding=6, background=theme_colors["powerline_background"][3],),
-    widget.TextBox(
-        text=chr(987798),
-        font=icon_font,
-        foreground=theme_colors["powerline_fg"],
-        background=theme_colors["powerline_background"][3],
-    ),
-    ]
-)
+        [
+        widget.Systray(
+            foreground=theme_colors["powerline_fg"],
+            background=theme_colors["powerline_background"][3],
+        ),
+        widget.Sep(linewidth=0, padding=6, background=theme_colors["powerline_background"][3],),
+        widget.TextBox(
+            text=chr(987798),
+            font=icon_font,
+            foreground=theme_colors["powerline_fg"],
+            background=theme_colors["powerline_background"][3],
+        ),
+        ]
+    )
 >>> pl_rhs.add(systray, side=Side.RIGHT)
 >>> widgets = pl_rhs.widgets()
 >>> bar.extend(widgets)
@@ -84,10 +84,10 @@ class Segment:
 
         l = []
         if self.widget_list and not isinstance(self.widget_list[0], widget.Sep):
-        l.append(self.sep)
+            l.append(self.sep)
         l.extend(self.widget_list)
         if self.widget_list and not isinstance(self.widget_list[-1], widget.Sep):
-        l.append(self.sep)
+            l.append(self.sep)
         return l
 
 
@@ -181,10 +181,12 @@ class Powerline:
         for w in self._widgets_right[::-1]:
             widget_list.append(w)
 
+        # Add separators at the start and end of the list of widgets
+        # if there aren't ones there already there.
         if self._widgets_left and not isinstance(self._widgets_left[0], widget.Sep):
-            widgets_list.insert(0, widget.Sep(linewidth=0, padding=6, background=self.widgets[0].background,))
+            widget_list.insert(0, widget.Sep(linewidth=0, padding=6, background=widget_list[0].background,))
 
         if self._widgets_right and not isinstance(widget_list[-1], widget.Sep):
-            widget_list.append(widget.Sep(linewidth=0, padding=6, background=self.widgets[-1].background,))
+            widget_list.append(widget.Sep(linewidth=0, padding=6, background=widget_list[-1].background,))
 
         return widget_list
