@@ -1,9 +1,7 @@
-"""
-pl_rhs = Powerline(
-    s["theme"]["color"]["powerline_fg"],
-    s["theme"]["color"]["powerline_background"],
-)
-systray = Segment(
+"""Easily construct a list of QTile widgets with powerline separators
+
+>>> powerline = Powerline(foreground="ffffff", background=["aaaaaa", "cccccc"])
+>>> systray = Segment(
     [
     widget.Systray(
         foreground=theme_colors["powerline_fg"],
@@ -18,9 +16,9 @@ systray = Segment(
     ),
     ]
 )
-pl_rhs.add(systray, side=Side.RIGHT)
-widgets = pl_rhs.widgets()
-bar.extend(widgets)
+>>> pl_rhs.add(systray, side=Side.RIGHT)
+>>> widgets = pl_rhs.widgets()
+>>> bar.extend(widgets)
 """
 
 from enum import Enum
@@ -114,6 +112,11 @@ class SegmentSeparator(widget.TextBox):
 
 
 class Powerline:
+    """Creates a list of widgets for a QTile bar
+    
+    Widgets are added using Segments that only contain the required widgets.
+    Separators are added between each segment
+    """
     def __init__(
         self,
         foreground: str,
@@ -130,6 +133,8 @@ class Powerline:
         self._next_background = None
 
     def add(self, segment, side: Side = Side.RIGHT) -> None:
+        """Add a segment to the either side of the powerline"""
+
         segment.foreground = self.foreground
         if not self._next_background:
             self._background = self._segment_color_iter.__next__()
@@ -156,6 +161,7 @@ class Powerline:
         )
 
     def widgets(self) -> List[WIDGET_BASE]:
+        """Return a list of widets ready to be added to a Bar"""
         if not self._widgets_left and not self._widgets_right:
             return []
             
