@@ -68,6 +68,7 @@ def build_bar(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
             this_screen_border=theme_colors["group_current_bg"],
             # other_current_screen_border=theme_colors["panel_bg"],
             # other_screen_border=theme_colors["panel_bg"],
+            disable_drag=True,
         ),
         _line_sep(),
         widget.CurrentLayout(
